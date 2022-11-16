@@ -5,7 +5,7 @@ const request = supertest(app);
 describe('Test Routes User', () => {
   it('Route get all ', async () => {
     const res = await request
-      .get('/api/user')
+      .get('/api/user/')
       .set('Accept', 'application/json');
     expect(res.status).toEqual(200);
   });

@@ -4,7 +4,7 @@ import app from '../../index';
 const request = supertest(app);
 describe('Test Product Routes', () => {
   it('Route get all ', async () => {
-    const res = await request.get('/api/product');
+    const res = await request.get('/api/product/');
     expect(res.status).toBe(200);
   });
 
