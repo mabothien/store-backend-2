@@ -11,6 +11,6 @@
     "user": "postgres",
     "password": "1234",
     "host": "localhost",
-    "database": "devDB5"
+    "database": "devdb_test"
   }
 }
