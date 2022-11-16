@@ -44,14 +44,14 @@ const ProductModel = {
     }
   },
 
-  update: async (u: Product): Promise<Product> => {
+  update: async (product: Product): Promise<Product> => {
     try {
       const conn = await db.connect();
       const sql = `UPDATE public.product
                     SET name=$1, price=$2,
                     WHERE id=$3
                     RETURNING id, name, price`;
-      const result = await conn.query(sql, [u.name, u.price, u.id]);
+      const result = await conn.query(sql, [product.name, product.price, product.id]);
       conn.release();
       return result.rows[0];
     } catch (error) {

@@ -6,7 +6,6 @@
 npm install
 ```
 
-
 ## build
 
 Builds the app at `build`, cleaning the folder first.
@@ -28,7 +27,6 @@ Starts the application in development environment.
 ```sh
 npm run dev
 ```
-
 
 ## Test
 

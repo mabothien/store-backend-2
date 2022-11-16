@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS public.orders
     id SERIAL PRIMARY KEY,
     status character varying(15) COLLATE pg_catalog."default",
     user_id SERIAL,
-    quantity integer,
+    quantity integer
 );
 
 CREATE TABLE IF NOT EXISTS public.product
