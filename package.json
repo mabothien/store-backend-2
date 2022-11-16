@@ -4,9 +4,9 @@
   "description": "Storefront Backend",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js",
     "dev": "nodemon",
-    "build": "rimraf ./build && tsc",
     "migration:run": "db-migrate up",
     "migration:down": "db-migrate down",
     "lint": "eslint . --ext .ts",
