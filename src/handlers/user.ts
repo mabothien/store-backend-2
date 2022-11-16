@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-export const index = async (_: Request, res: Response, next: NextFunction) => {
+export const index = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await UserModel.index();
     res.json({
