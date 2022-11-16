@@ -27,8 +27,8 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
       res.status(401).send({ error: 'no header. Please check' });
     }
   } catch (err) {
-    res.status(400)
-    res.json(err)
+    res.status(400);
+    res.json(err);
   }
 };
 

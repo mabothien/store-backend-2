@@ -7,7 +7,7 @@ export type Order = {
 };
 
 const OrderModel = {
-  index:  async (): Promise<Order[]> => {
+  index: async (): Promise<Order[]> => {
     try {
       const conn = await db.connect();
       const sql = 'SELECT * from public.orders';
@@ -15,7 +15,7 @@ const OrderModel = {
       conn.release();
       return result.rows;
     } catch (error) {
-       throw new Error(`Errors ${(error as Error).message}`);
+      throw new Error(`Errors ${(error as Error).message}`);
     }
   },
 
@@ -33,7 +33,7 @@ const OrderModel = {
       conn.release();
       return order;
     } catch (error) {
-       throw new Error(`Errors ${(error as Error).message}`);
+      throw new Error(`Errors ${(error as Error).message}`);
     }
   },
 
@@ -46,7 +46,7 @@ const OrderModel = {
       conn.release();
       return result.rows[0];
     } catch (error) {
-       throw new Error(`Errors ${(error as Error).message}`);
+      throw new Error(`Errors ${(error as Error).message}`);
     }
   },
 
@@ -61,7 +61,7 @@ const OrderModel = {
       conn.release();
       return result.rows[0];
     } catch (error) {
-       throw new Error(`Errors ${(error as Error).message}`);
+      throw new Error(`Errors ${(error as Error).message}`);
     }
   },
 
@@ -75,9 +75,9 @@ const OrderModel = {
       conn.release();
       return result.rows[0];
     } catch (error) {
-       throw new Error(`Errors ${(error as Error).message}`);
+      throw new Error(`Errors ${(error as Error).message}`);
     }
-  }
-}
+  },
+};
 
 export default OrderModel;

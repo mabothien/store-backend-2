@@ -11,7 +11,7 @@ export type User = {
   password: string;
 };
 
-const UserModel =  {
+const UserModel = {
   index: async (): Promise<User[]> => {
     try {
       const conn = await db.connect();
@@ -30,7 +30,10 @@ const UserModel =  {
       const sql =
         'INSERT INTO public."user" ("firstName", "lastName" , username, password) VALUES($1, $2, $3, $4) RETURNING *';
       const saltRounds = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(user.password, parseInt(saltRounds));
+      const hashedPassword = bcrypt.hashSync(
+        user.password,
+        parseInt(saltRounds),
+      );
       const result = await conn.query(sql, [
         user.firstName,
         user.lastName,
@@ -57,7 +60,7 @@ const UserModel =  {
     }
   },
 
-  updateUser : async (user: User): Promise<User> => {
+  updateUser: async (user: User): Promise<User> => {
     try {
       const conn = await db.connect();
       const sql = `UPDATE public."user"
@@ -79,7 +82,7 @@ const UserModel =  {
     }
   },
 
-  deleteUser : async (id: string): Promise<User> => {
+  deleteUser: async (id: string): Promise<User> => {
     try {
       const conn = await db.connect();
       const sql = `DELETE FROM public."user"
@@ -93,7 +96,10 @@ const UserModel =  {
     }
   },
 
-  authenticate: async (username: string, password: string): Promise<User | null> => {
+  authenticate: async (
+    username: string,
+    password: string,
+  ): Promise<User | null> => {
     try {
       const connection = await db.connect();
 
@@ -114,7 +120,6 @@ const UserModel =  {
     } catch (error) {
       throw new Error(`Errors ${(error as Error).message}`);
     }
-  }
-
-}
-export default UserModel
+  },
+};
+export default UserModel;

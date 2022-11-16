@@ -1,8 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import OrderModel from '../models/order';
 
-
-export const index = async (req: Request, res: Response, next: NextFunction) => {
+export const index = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const result = await OrderModel.index();
     res.json({
@@ -22,18 +25,14 @@ export const create = async (
     const { status, quantity, orderId } = req.body;
     const result = await OrderModel.create(status, quantity, orderId);
     res.json({
-      data: result
+      data: result,
     });
   } catch (err) {
     next(err);
   }
 };
 
-export const show = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const show = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const result = await OrderModel.show(parseInt(id));
@@ -66,7 +65,7 @@ export const deleteById = async (
   next: NextFunction,
 ) => {
   try {
-    const {id} =req.params
+    const { id } = req.params;
     const result = await OrderModel.deleteOrder(id as string);
     res.json({
       data: result,

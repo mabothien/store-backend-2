@@ -7,7 +7,7 @@ export const addProductToOrder = async (
   next: NextFunction,
 ) => {
   try {
-    const result = await ProductOrderModel.create(req.body)
+    const result = await ProductOrderModel.create(req.body);
     res.json({
       data: result,
     });

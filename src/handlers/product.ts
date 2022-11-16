@@ -7,7 +7,7 @@ export const index = async (
   next: NextFunction,
 ) => {
   try {
-    const result = await ProductModel.index()
+    const result = await ProductModel.index();
     res.json({
       data: result,
     });

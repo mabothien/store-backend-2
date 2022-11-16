@@ -5,7 +5,7 @@ export type Product = {
   price: number;
 };
 const ProductModel = {
-  index : async (): Promise<number[]> => {
+  index: async (): Promise<number[]> => {
     try {
       const connection = await db.connect();
       const sql = 'SELECT * FROM public.product';
@@ -59,7 +59,7 @@ const ProductModel = {
     }
   },
 
-  delete : async (id: string): Promise<Product> => {
+  delete: async (id: string): Promise<Product> => {
     try {
       const conn = await db.connect();
       const sql = `DELETE FROM public.product
@@ -71,7 +71,7 @@ const ProductModel = {
     } catch (error) {
       throw new Error(`Errors ${(error as Error).message}`);
     }
-  }
-}
+  },
+};
 
-export default ProductModel
+export default ProductModel;

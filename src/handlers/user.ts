@@ -1,12 +1,12 @@
-import { NextFunction, Request, Response } from "express";
-import UserModel from "../models/user";
+import { NextFunction, Request, Response } from 'express';
+import UserModel from '../models/user';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
 export const index = async (_: Request, res: Response, next: NextFunction) => {
   try {
-    const result =  await UserModel.index();
+    const result = await UserModel.index();
     res.json({
       data: result,
     });
@@ -30,14 +30,10 @@ export const create = async (
   }
 };
 
-export const show = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const show = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const result =  await UserModel.show(id as string);
+    const result = await UserModel.show(id as string);
     res.json({
       data: result,
     });
@@ -52,7 +48,7 @@ export const updateById = async (
   next: NextFunction,
 ) => {
   try {
-    const result =  await UserModel.updateUser(req.body);
+    const result = await UserModel.updateUser(req.body);
     res.json({
       data: result,
     });
@@ -68,7 +64,7 @@ export const deleteById = async (
 ) => {
   try {
     const { id } = req.params;
-    const result =  await UserModel.deleteUser(id as string);
+    const result = await UserModel.deleteUser(id as string);
     res.json({
       data: result,
     });
@@ -84,12 +80,12 @@ export const authenticate = async (
 ) => {
   try {
     const { username, password } = req.body;
-    const user =  await UserModel.authenticate(username, password);
+    const user = await UserModel.authenticate(username, password);
     const token = jwt.sign(
       { user },
       process.env.TOKEN_SECRET_KEY as unknown as string,
     );
-    res.json(token)
+    res.json(token);
   } catch (err) {
     return next(err);
   }
