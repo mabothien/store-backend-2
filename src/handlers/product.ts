@@ -42,3 +42,19 @@ export const show = async (req: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 };
+export const deleteProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const product = await ProductModel.delete(
+      parseInt(req.params.id),
+    );
+    res.json({
+      data: product,
+    });
+  } catch (err) {
+    next(err);
+  }
+};

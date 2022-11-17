@@ -49,6 +49,20 @@ const OrderModel = {
       throw new Error(`Errors ${(error as Error).message}`);
     }
   },
+  
+  deleteOrder: async (id: number): Promise<Order> => {
+    try {
+      const conn = await client.connect();
+      const sql = `DELETE FROM public.orders
+                    WHERE id=($1)
+                    RETURNING id`;
+      const result = await conn.query(sql, [id]);
+      conn.release();
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Errors ${(error as Error).message}`);
+    }
+  },
 };
 
 export default OrderModel;

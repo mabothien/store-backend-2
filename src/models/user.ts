@@ -60,6 +60,19 @@ const UserModel = {
     }
   },
 
+  deleteUser: async (id: number): Promise<User> => {
+    try {
+      const conn = await db.connect();
+      const sql = `DELETE FROM public."user"
+                    WHERE id=($1)
+                    RETURNING id, username`;
+      const result = await conn.query(sql, [id]);
+      conn.release();
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Errors ${(error as Error).message}`);
+    }
+  },
   authenticate: async (
     username: string,
     password: string,

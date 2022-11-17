@@ -63,3 +63,19 @@ export const authenticate = async (
     return next(err);
   }
 };
+
+export const deleteById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const result = await UserModel.deleteUser(parseInt(id));
+    res.json({
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -1,9 +1,30 @@
-import UserModel from '../user';
+import UserModel, { User } from '../user';
 
 describe('Test User Model Methods', () => {
+  let user = {} as User;
+  
+  it('create user', async () => {
+    const params = {
+      firstName: 'long',
+      lastName: 'tran',
+      username: 'longtran',
+      password: 'long123',
+    };
+    const result = await UserModel.create(params);
+    user = result
+    const users = await UserModel.index();
+    expect(users.length).toBeGreaterThan(0);
+  });
+  
   it('Get user by Id', async () => {
-    const user = await UserModel.show(1);
-    expect(user.id).toEqual(1);
+    const result = await UserModel.show(user.id as number);
+    expect(result).toEqual({
+      id: user.id,
+      firstName: 'long',
+      lastName: 'tran',
+      username: 'longtran',
+      password: user.password,
+    });
   });
 
   it('Get all user', async () => {
@@ -11,15 +32,10 @@ describe('Test User Model Methods', () => {
     expect(users.length).toBeGreaterThan(0);
   });
 
-  it('create user', async () => {
-    const user = {
-      firstName: 'long',
-      lastName: 'tran',
-      username: 'longtran',
-      password: 'long123',
-    };
-    await UserModel.create(user);
-    const users = await UserModel.index();
-    expect(users.length).toBeGreaterThan(0);
+
+  it('delete method', async () => {
+    await UserModel.deleteUser(user.id as number);
+    const result = await UserModel.index();
+    expect(result).toEqual([]);
   });
 });
