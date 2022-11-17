@@ -13,12 +13,6 @@ describe('Test User Model Methods', () => {
     expect(users.length).toBeGreaterThan(0);
   });
 
-  it('delete user', async () => {
-    await UserModel.deleteUser(1)
-    const res = await UserModel.index();
-    expect(res).toEqual([]);
-  });
-
   it('create user', async () => {
     const user = {
       firstName: "long",

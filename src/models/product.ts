@@ -42,21 +42,7 @@ const ProductModel = {
     } catch (error) {
       throw new Error(`Errors ${(error as Error).message}`);
     }
-  },
-
-  delete: async (id: number): Promise<Product> => {
-    try {
-      const conn = await client.connect();
-      const sql = `DELETE FROM public.product
-                    WHERE id=($1)
-                    RETURNING id, name`;
-      const result = await conn.query(sql, [id]);
-      conn.release();
-      return result.rows[0];
-    } catch (error) {
-      throw new Error(`Errors ${(error as Error).message}`);
-    }
-  },
+  }
 };
 
 export default ProductModel;

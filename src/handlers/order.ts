@@ -43,19 +43,3 @@ export const show = async (req: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 };
-
-export const deleteById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const { id } = req.params;
-    const result = await OrderModel.deleteOrder(parseInt(id));
-    res.json({
-      data: result,
-    });
-  } catch (err) {
-    next(err);
-  }
-};

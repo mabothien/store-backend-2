@@ -10,12 +10,6 @@ describe('Order Model', () => {
     const order = await OrderModel.index()
     expect(order.length).toBeGreaterThan(0);
   });
-
-  it('delete Order', async () => {
-    const result = await OrderModel.deleteOrder(1)
-    expect(result.id).toEqual(1);
-  });
-
   it('create Order', async () => {
     const order = {
       status: 'created',

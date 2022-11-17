@@ -11,12 +11,6 @@ describe('Test Product Model Methods', () => {
     expect(users.length).toBeGreaterThan(0);
   });
 
-  it('delete Product', async () => {
-    await ProductModel.delete(1)
-    const res = await ProductModel.index();
-    expect(res).toEqual([]);
-  });
-
   it('create Product', async () => {
     const product = {
       name: 'test',
