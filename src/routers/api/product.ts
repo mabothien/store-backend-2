@@ -7,6 +7,5 @@ productRoutes.route('/').get(handlers.index);
 productRoutes.route('/create').post(validateToken, handlers.create);
 productRoutes.route('/:id').get(handlers.show);
 productRoutes.route('/:id').delete(validateToken, handlers.deleteProduct);
-productRoutes.route('/:id').put(validateToken, handlers.updateProduct);
 
 export default productRoutes;

@@ -11,16 +11,6 @@ describe('Order Model', () => {
     expect(order.length).toBeGreaterThan(0);
   });
 
-  it('update Order', async () => {
-    const order = {
-      id: 1,
-      status: 'created',
-    }
-    await OrderModel.updateOrder(order.status,order.id)
-    const res = await OrderModel.show(order.id)
-    expect(res.id).toEqual(1);
-  });
-
   it('delete Order', async () => {
     const result = await OrderModel.deleteOrder(1)
     expect(result.id).toEqual(1);

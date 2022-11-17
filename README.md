@@ -5,7 +5,20 @@
 #### This project install pgAdmin 4.0 to manage database
 ## Migrate database
 
-Step 1: Create 2 database: `devdb` and `devdb_test`
+### Create database
+devdb: `CREATE DATABASE devdb;`
+devdb_test: `CREATE DATABASE devdb_test;`
+
+### CREATE USER
+
+```sh
+CREATE USER full_stack_user with encrypted password '1234';
+```
+
+### Grant all database privileges to user in both database
+
+`grant all privileges on database devdb to full_stack_user;`
+`grant all privileges on database devdb_test to full_stack_user;`
 
 Step 2: run command migrate
 
@@ -14,16 +27,17 @@ npm run migration:run
 
 ```
 
+
 `.env` file contains env variables including username and password
 ```
 PORT=8000
 ENV=dev
-POSTGRES_USER = postgres
+POSTGRES_USER = full_stack_user
 POSTGRES_HOST = localhost
 POSTGRES_DB = devdb
 POSTGRES_TEST_DB= devdb_test
 POSTGRES_PASSWORD = 1234
-POSTGRES_PORT = 5432
+POSTGRES_PORT = 8080
 TOKEN_SECRET_KEY= long123!@$
 BCRYPT_PASSWORD=store-back-end
 SALT_ROUND=10

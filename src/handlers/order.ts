@@ -44,22 +44,6 @@ export const show = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const updateById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const {status, id} = req.body
-    const result = await OrderModel.updateOrder(status, id);
-    res.json({
-      data: result,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 export const deleteById = async (
   req: Request,
   res: Response,

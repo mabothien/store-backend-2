@@ -13,18 +13,6 @@ describe('Test User Model Methods', () => {
     expect(users.length).toBeGreaterThan(0);
   });
 
-  it('update user', async () => {
-    const user = {
-      firstName: "long1",
-      lastName:"tran2",
-      username:"longtran",
-      password:"long123",
-      id: 1,
-    }
-    const users = await UserModel.updateUser(user)
-    expect(users.firstName).toBe( users.firstName)
-  });
-
   it('delete user', async () => {
     await UserModel.deleteUser(1)
     const res = await UserModel.index();

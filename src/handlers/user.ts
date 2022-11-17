@@ -46,21 +46,6 @@ export const show = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const updateById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const result = await UserModel.updateUser(req.body);
-    res.json({
-      data: result,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 export const deleteById = async (
   req: Request,
   res: Response,

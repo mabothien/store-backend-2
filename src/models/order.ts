@@ -50,21 +50,6 @@ const OrderModel = {
     }
   },
 
-  updateOrder: async (status: string, id:number): Promise<Order> => {
-    try {
-      const conn = await client.connect();
-      const sql = `UPDATE public.orders
-                    SET status=$1
-                    WHERE id=$2
-                    RETURNING id, status`;
-      const result = await conn.query(sql, [status, id]);
-      conn.release();
-      return result.rows[0];
-    } catch (error) {
-      throw new Error(`Errors ${(error as Error).message}`);
-    }
-  },
-
   deleteOrder: async (id: number): Promise<Order> => {
     try {
       const conn = await client.connect();

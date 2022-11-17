@@ -43,21 +43,6 @@ export const show = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const updateProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const product = await ProductModel.update(req.body);
-    res.json({
-      data: product,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 export const deleteProduct = async (
   req: Request,
   res: Response,

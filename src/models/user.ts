@@ -60,28 +60,6 @@ const UserModel = {
     }
   },
 
-  updateUser: async (user: User): Promise<User> => {
-    try {
-      const conn = await db.connect();
-      const sql = `UPDATE public."user"
-                    SET firstName=$1, lastName=$2, username=$3, password=$4,
-                    WHERE id=$5
-                    RETURNING id, firstName, lastName, ussername`;
-
-      const result = await conn.query(sql, [
-        user.firstName,
-        user.lastName,
-        user.username,
-        user.password,
-        user.id,
-      ]);
-      conn.release();
-      return result.rows[0];
-    } catch (error) {
-      throw new Error(`Errors ${(error as Error).message}`);
-    }
-  },
-
   deleteUser: async (id: number): Promise<User> => {
     try {
       const conn = await db.connect();
