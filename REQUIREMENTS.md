@@ -98,4 +98,4 @@ These are the notes from a meeting with the frontend developer that describe wha
 | quantity             | `integer`
 
 ## Database schema
-![Alt text](Capture.png "a title")
+![Alt text](https://github.com/mabothien/store-backend-2/blob/main/Capture.PNG?raw=true "a title")
