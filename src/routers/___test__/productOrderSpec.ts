@@ -11,12 +11,14 @@ describe('Test Routes productOrder', () => {
       password: 'long123',
     });
 
-    await request.post('/api/order/create').send({
-      status: 'created',
-      userId: 1,
-      quantity: 1000,
-    })
-    .set('Authorization', `Bearer ${token.body}`);
+    await request
+      .post('/api/order/create')
+      .send({
+        status: 'created',
+        userId: 1,
+        quantity: 1000,
+      })
+      .set('Authorization', `Bearer ${token.body}`);
 
     await request
       .post('/api/product/create')

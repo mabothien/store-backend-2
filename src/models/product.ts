@@ -5,7 +5,7 @@ export type Product = {
   price: number;
 };
 const ProductModel = {
-  index: async (): Promise<number[]> => {
+  index: async (): Promise<Product[]> => {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM public.product';
@@ -42,7 +42,7 @@ const ProductModel = {
     } catch (error) {
       throw new Error(`Errors ${(error as Error).message}`);
     }
-  }
+  },
 };
 
 export default ProductModel;

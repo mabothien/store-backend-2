@@ -6,8 +6,8 @@ describe('Test productOrder Model Methods', () => {
       orderId: 1,
       productId: 1,
       quantity: 1,
-    }
-    const res = await ProductOrderModel.create(product)
+    };
+    const res = await ProductOrderModel.create(product);
     expect(res.orderId).toBeGreaterThan(1);
   });
 });

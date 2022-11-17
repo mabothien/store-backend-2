@@ -7,7 +7,7 @@ describe('Order Model', () => {
   });
 
   it('Get all Order', async () => {
-    const order = await OrderModel.index()
+    const order = await OrderModel.index();
     expect(order.length).toBeGreaterThan(0);
   });
   it('create Order', async () => {
@@ -15,10 +15,9 @@ describe('Order Model', () => {
       status: 'created',
       user_id: 1,
       quantity: 5,
-    }
-    await OrderModel.create(order.status,order.quantity,order.user_id)
-    const users = await OrderModel.index()
+    };
+    await OrderModel.create(order.status, order.quantity, order.user_id);
+    const users = await OrderModel.index();
     expect(users.length).toBeGreaterThan(0);
   });
-
 });

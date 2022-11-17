@@ -18,7 +18,7 @@ let client = new Pool({
   database: POSTGRES_DB,
   user: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
-  port: Number(POSTGRES_PORT)
+  port: Number(POSTGRES_PORT),
 });
 if (ENV === 'test') {
   client = new Pool({
@@ -26,7 +26,7 @@ if (ENV === 'test') {
     database: POSTGRES_TEST_DB,
     user: POSTGRES_USER,
     password: POSTGRES_PASSWORD,
-    port: Number(POSTGRES_PORT)
+    port: Number(POSTGRES_PORT),
   });
 }
 export default client;
