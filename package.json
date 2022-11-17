@@ -2,7 +2,7 @@
   "name": "store-backend-2",
   "version": "1.0.0",
   "description": "Storefront Backend",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js",
