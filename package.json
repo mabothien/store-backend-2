@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .ts",
     "prettier-format": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
     "jasmine": "jasmine",
-    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
+    "watch": "tsc-watch --esModuleInterop src/index.ts --outDir ./build --onSuccess \"node ./build/index.js\"",
     "test": "set ENV=test && db-migrate --env test up && jasmine && db-migrate db:drop test",
     "test-source": "npm run build && npm run jasmine",
     "tsc": "tsc"

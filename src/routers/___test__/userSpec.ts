@@ -2,48 +2,38 @@ import supertest from 'supertest';
 import app from '../../index';
 
 const request = supertest(app);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let token: any;
 describe('Test Routes User', () => {
-  it('Route get all ', async () => {
-    const res = await request
-      .get('/api/user/')
-      .set('Accept', 'application/json');
-    expect(res.status).toEqual(200);
+  beforeAll(async () => {
+    token = await request.post('/api/user/auth').send({
+      username: 'longtran',
+      password: 'long123',
+    });
   });
 
   it('Route create User ', async () => {
+    const res = await request.post('/api/user/create').send({
+      firstName: 'long 2',
+      lastName: 'tran 2',
+      username: 'longtran2',
+      password: 'long123',
+    });
+    expect(res.statusCode).toEqual(200);
+  });
+
+  it('Route get all ', async () => {
     const res = await request
-      .post('/api/user')
-      .send({
-        firstName: 'long',
-        lastname: 'tran',
-        username: 'longtran',
-        password: 'yourpassword',
-      })
-      .set('Accept', 'application/json');
-    expect(res.status).toEqual(200);
+      .get('/api/user/')
+      .set('Authorization', `Bearer ${token.body}`);
+    expect(res.statusCode).toEqual(200);
   });
 
   it('Route get user by id', async () => {
     const res = await request
       .get(`/api/user/1`)
-      .set('Accept', 'application/json');
+      .set('Authorization', `Bearer ${token.body}`);
     expect(res.status).toEqual(200);
-  });
-
-  it('Route update user', async () => {
-    const res = await request.put(`/api/user/1`).send({
-      firstName: 'long',
-      lastname: 'tran',
-      username: 'longtran',
-      password: 'yourpassword',
-      id:1
-    })
-    .set('Accept', 'application/json');;
-    expect(res.status).toBe(200);
-  });
-
-  it('Route delete user', async () => {
-    const res = await request.delete(`/api/user/1`);
-    expect(res.status).toBe(200);
   });
 });

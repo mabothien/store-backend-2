@@ -14,7 +14,11 @@ These are the notes from a meeting with the frontend developer that describe wha
 }
 
 #### Users
-
+- Get token: <http://localhost:8000/api/user/auth> [GET]
+  body json: {
+  "username":"longtran",
+  "password":"long123"
+  }
 - Index [token required] : <http://localhost:8000/api/user> [GET]
 - Show [token required] <http://localhost:8000/api/user/:id> [GET]
 - Create N[token required]: <http://localhost:8000/api/user/create> [POST]
@@ -92,3 +96,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 | orderId                 | `SERIAL`
 | productId             | `SERIAL`
 | quantity             | `integer`
+
+## Database schema
+![Alt text](Capture.png "a title")

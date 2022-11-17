@@ -1,4 +1,4 @@
-import ProductModel from "../product";
+import ProductModel from '../product';
 
 describe('Test Product Model Methods', () => {
   it('Get all Product exist', () => {

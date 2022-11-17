@@ -1,4 +1,4 @@
-import ProductOrderModel from "../productOrder";
+import ProductOrderModel from '../productOrder';
 
 describe('Test productOrder Model Methods', () => {
   it('add product to order', () => {

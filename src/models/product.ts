@@ -1,4 +1,4 @@
-import db from '../database';
+import client from '../database';
 export type Product = {
   id?: string;
   name: string;
@@ -7,7 +7,7 @@ export type Product = {
 const ProductModel = {
   index: async (): Promise<number[]> => {
     try {
-      const connection = await db.connect();
+      const connection = await client.connect();
       const sql = 'SELECT * FROM public.product';
       const result = await connection.query(sql);
       connection.release();
@@ -21,7 +21,7 @@ const ProductModel = {
     try {
       const sql = `SELECT * FROM public.product
       WHERE id=($1)`;
-      const conn = await db.connect();
+      const conn = await client.connect();
       const result = await conn.query(sql, [id]);
       conn.release();
       return result.rows[0];
@@ -32,7 +32,7 @@ const ProductModel = {
 
   create: async (product: Product): Promise<Product> => {
     try {
-      const conn = await db.connect();
+      const conn = await client.connect();
       const sql = `INSERT INTO public.product (name, price)
                   values ($1, $2)
                   RETURNING name, price`;
@@ -46,12 +46,16 @@ const ProductModel = {
 
   update: async (product: Product): Promise<Product> => {
     try {
-      const conn = await db.connect();
+      const conn = await client.connect();
       const sql = `UPDATE public.product
                     SET name=$1, price=$2,
                     WHERE id=$3
                     RETURNING id, name, price`;
-      const result = await conn.query(sql, [product.name, product.price, product.id]);
+      const result = await conn.query(sql, [
+        product.name,
+        product.price,
+        product.id,
+      ]);
       conn.release();
       return result.rows[0];
     } catch (error) {
@@ -61,7 +65,7 @@ const ProductModel = {
 
   delete: async (id: string): Promise<Product> => {
     try {
-      const conn = await db.connect();
+      const conn = await client.connect();
       const sql = `DELETE FROM public.product
                     WHERE id=($1)
                     RETURNING id, name`;

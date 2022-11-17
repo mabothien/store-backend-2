@@ -1,4 +1,4 @@
-import db from '../database';
+import client from '../database';
 export type ProductOrder = {
   orderId: number;
   productId: number;
@@ -7,7 +7,7 @@ export type ProductOrder = {
 const ProductOrderModel = {
   create: async (product: ProductOrder): Promise<ProductOrder> => {
     try {
-      const conn = await db.connect();
+      const conn = await client.connect();
       const sql = `INSERT INTO public.product_order (orderId, productId, quantity)
                   values ($1, $2, $3)
                   RETURNING orderId`;

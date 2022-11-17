@@ -1,15 +1,15 @@
-import db from '../database';
+import client from '../database';
 export type Order = {
   id?: string;
   status: string;
-  user_id: string;
+  user_id: number;
   quantity: number;
 };
 
 const OrderModel = {
   index: async (): Promise<Order[]> => {
     try {
-      const conn = await db.connect();
+      const conn = await client.connect();
       const sql = 'SELECT * from public.orders';
       const result = await conn.query(sql);
       conn.release();
@@ -22,10 +22,10 @@ const OrderModel = {
   create: async (
     status: string,
     quantity: number,
-    userId: string,
+    userId: number,
   ): Promise<Order> => {
     try {
-      const conn = await db.connect();
+      const conn = await client.connect();
       const sql =
         'INSERT INTO public.orders(status, user_id, quantity) VALUES($1, $2, $3) RETURNING *';
       const result = await conn.query(sql, [status, userId, quantity]);
@@ -41,7 +41,7 @@ const OrderModel = {
     try {
       const sql = `SELECT * FROM public.orders
         WHERE id=($1)`;
-      const conn = await db.connect();
+      const conn = await client.connect();
       const result = await conn.query(sql, [user_id]);
       conn.release();
       return result.rows[0];
@@ -52,7 +52,7 @@ const OrderModel = {
 
   updateOrder: async (u: Order): Promise<Order> => {
     try {
-      const conn = await db.connect();
+      const conn = await client.connect();
       const sql = `UPDATE public.orders
                     SET status=$1
                     WHERE id=$2
@@ -67,7 +67,7 @@ const OrderModel = {
 
   deleteOrder: async (id: string): Promise<Order> => {
     try {
-      const conn = await db.connect();
+      const conn = await client.connect();
       const sql = `DELETE FROM public.orders
                     WHERE id=($1)
                     RETURNING id, name`;

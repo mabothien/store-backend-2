@@ -1,30 +1,20 @@
 import supertest from 'supertest';
 import app from '../../index';
-
 const request = supertest(app);
-describe('Test Order Routes', () => {
-  it('Route get all ', async () => {
-    const res = await request.get('/api/order/');
-    expect(res.status).toBe(200);
+
+let token: any;
+describe('Test order Routes', () => {
+  beforeAll(async () => {
+    token = await request.post('/api/user/auth').send({
+      username: 'longtran',
+      password: 'long123',
+    });
   });
 
-  it('Route create order ', async () => {
-    const res = await request.post('/api/order/create');
-    expect(res.status).toBe(200);
-  });
-
-  it('Route get by ID', async () => {
-    const res = await request.get(`/api/order/1`);
-    expect(res.status).toBe(200);
-  });
-
-  it('Route update order', async () => {
-    const res = await request.put(`/api/order/1`);
-    expect(res.status).toBe(200);
-  });
-
-  it('Route delete order', async () => {
-    const res = await request.delete(`/api/order/1`);
-    expect(res.status).toBe(200);
+  it('Route get order by ID', async () => {
+    const res = await request
+      .get(`/api/order/1`)
+      .set('Authorization', `Bearer ${token.body}`);
+    expect(res.statusCode).toBe(200);
   });
 });

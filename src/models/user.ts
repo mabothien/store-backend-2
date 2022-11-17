@@ -102,7 +102,6 @@ const UserModel = {
   ): Promise<User | null> => {
     try {
       const connection = await db.connect();
-
       const sql = 'SELECT password FROM public."user" WHERE username=$1';
       const result = await connection.query(sql, [username]);
       if (result.rows.length) {
