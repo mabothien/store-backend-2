@@ -34,7 +34,7 @@ export const create = async (
 export const show = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const order = await ProductModel.show(id);
+    const order = await ProductModel.show(parseInt(id));
     res.json({
       data: order,
     });
@@ -65,7 +65,7 @@ export const deleteProduct = async (
 ) => {
   try {
     const product = await ProductModel.delete(
-      req.params.id as unknown as string,
+      parseInt(req.params.id),
     );
     res.json({
       data: product,

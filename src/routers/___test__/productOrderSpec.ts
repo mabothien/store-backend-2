@@ -15,7 +15,8 @@ describe('Test Routes productOrder', () => {
       status: 'created',
       userId: 1,
       quantity: 1000,
-    });
+    })
+    .set('Authorization', `Bearer ${token.body}`);
 
     await request
       .post('/api/product/create')
@@ -26,7 +27,7 @@ describe('Test Routes productOrder', () => {
       });
   });
 
-  fit('Route add product to order ', async () => {
+  it('Route add product to order ', async () => {
     const res = await request
       .post('/api/productOrder/create')
       .set('Authorization', `Bearer ${token.body}`)

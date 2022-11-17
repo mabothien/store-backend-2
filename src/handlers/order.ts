@@ -50,7 +50,8 @@ export const updateById = async (
   next: NextFunction,
 ) => {
   try {
-    const result = await OrderModel.updateOrder(req.body);
+    const {status, id} = req.body
+    const result = await OrderModel.updateOrder(status, id);
     res.json({
       data: result,
     });
@@ -66,7 +67,7 @@ export const deleteById = async (
 ) => {
   try {
     const { id } = req.params;
-    const result = await OrderModel.deleteOrder(id as string);
+    const result = await OrderModel.deleteOrder(parseInt(id));
     res.json({
       data: result,
     });

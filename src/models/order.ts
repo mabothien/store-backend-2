@@ -1,6 +1,6 @@
 import client from '../database';
 export type Order = {
-  id?: string;
+  id?: number;
   status: string;
   user_id: number;
   quantity: number;
@@ -37,12 +37,12 @@ const OrderModel = {
     }
   },
 
-  show: async (user_id: number): Promise<Order> => {
+  show: async (order_id: number): Promise<Order> => {
     try {
       const sql = `SELECT * FROM public.orders
         WHERE id=($1)`;
       const conn = await client.connect();
-      const result = await conn.query(sql, [user_id]);
+      const result = await conn.query(sql, [order_id]);
       conn.release();
       return result.rows[0];
     } catch (error) {
@@ -50,14 +50,14 @@ const OrderModel = {
     }
   },
 
-  updateOrder: async (u: Order): Promise<Order> => {
+  updateOrder: async (status: string, id:number): Promise<Order> => {
     try {
       const conn = await client.connect();
       const sql = `UPDATE public.orders
                     SET status=$1
                     WHERE id=$2
                     RETURNING id, status`;
-      const result = await conn.query(sql, [u.status, u.id]);
+      const result = await conn.query(sql, [status, id]);
       conn.release();
       return result.rows[0];
     } catch (error) {
@@ -65,12 +65,12 @@ const OrderModel = {
     }
   },
 
-  deleteOrder: async (id: string): Promise<Order> => {
+  deleteOrder: async (id: number): Promise<Order> => {
     try {
       const conn = await client.connect();
       const sql = `DELETE FROM public.orders
                     WHERE id=($1)
-                    RETURNING id, name`;
+                    RETURNING id`;
       const result = await conn.query(sql, [id]);
       conn.release();
       return result.rows[0];

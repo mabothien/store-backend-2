@@ -37,7 +37,7 @@ export const create = async (
 export const show = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const result = await UserModel.show(id as string);
+    const result = await UserModel.show(parseInt(id));
     res.json({
       data: result,
     });
@@ -68,7 +68,7 @@ export const deleteById = async (
 ) => {
   try {
     const { id } = req.params;
-    const result = await UserModel.deleteUser(id as string);
+    const result = await UserModel.deleteUser(parseInt(id));
     res.json({
       data: result,
     });

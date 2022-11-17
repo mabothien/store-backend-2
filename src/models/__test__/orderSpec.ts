@@ -1,62 +1,40 @@
 import OrderModel from '../order';
 
 describe('Order Model', () => {
-  // it('should have an index method', () => {
-  //   expect(OrderModel.index).toBeDefined();
-  // });
-  it('should have an show method', () => {
-    expect(OrderModel.show).toBeDefined();
+  it('Get Order by Id', async () => {
+    const order = await OrderModel.show(1);
+    expect(order.id).toEqual(1);
   });
-  // it('should have an Create order method ', () => {
-  //   expect(OrderModel.create).toBeDefined();
-  // });
-  // it('should have an Update order method ', () => {
-  //   expect(OrderModel.updateOrder).toBeDefined();
-  // });
-  // it('should have an Delete order method ', () => {
-  //   expect(OrderModel.deleteOrder).toBeDefined();
-  // });
 
-  // it('create method should add a order', async () => {
-  //   const result = await OrderModel.create({
-  //     title: 'Bridge to Terabithia',
-  //     totalPages: 250,
-  //     author: 'Katherine Paterson',
-  //     summary: 'Childrens'
-  //   });
-  //   expect(result).toEqual({
-  //     id: "1",
-  //     title: 'Bridge to Terabithia',
-  //     totalPages: 250,
-  //     author: 'Katherine Paterson',
-  //     summary: 'Childrens'
-  //   });
-  // });
+  it('Get all Order', async () => {
+    const order = await OrderModel.index()
+    expect(order.length).toBeGreaterThan(0);
+  });
 
-  // it('index method should return a list of books', async () => {
-  //   const result = await OrderModel.index();
-  //   expect(result).toEqual([{
-  //     id: "1",
-  //     title: 'Bridge to Terabithia',
-  //     totalPages: 250,
-  //     author: 'Katherine Paterson',
-  //     summary: 'Childrens'
-  //   }]);
-  // });
+  it('update Order', async () => {
+    const order = {
+      id: 1,
+      status: 'created',
+    }
+    await OrderModel.updateOrder(order.status,order.id)
+    const res = await OrderModel.show(order.id)
+    expect(res.id).toEqual(1);
+  });
 
-  // it('show method should return the correct order', async () => {
-  //   const result = await OrderModel.show(1);
-  //   expect(result).toEqual({
-  //     status: 'created',
-  //     user_id: "1",
-  //     quantity: 1000,
-  //   });
-  // });
+  it('delete Order', async () => {
+    const result = await OrderModel.deleteOrder(1)
+    expect(result.id).toEqual(1);
+  });
 
-  // it('delete method should remove the book', async () => {
-  //   OrderModel.delete("1");
-  //   const result = await OrderModel.index()
+  it('create Order', async () => {
+    const order = {
+      status: 'created',
+      user_id: 1,
+      quantity: 5,
+    }
+    await OrderModel.create(order.status,order.quantity,order.user_id)
+    const users = await OrderModel.index()
+    expect(users.length).toBeGreaterThan(0);
+  });
 
-  //   expect(result).toEqual([]);
-  // });
 });

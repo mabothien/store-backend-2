@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export type User = {
-  id?: string;
+  id?: number;
   firstName: string;
   lastName: string;
   username: string;
@@ -47,7 +47,7 @@ const UserModel = {
     }
   },
 
-  show: async (id: string): Promise<User> => {
+  show: async (id: number): Promise<User> => {
     try {
       const sql = `SELECT * FROM public."user"
         WHERE id=($1)`;
@@ -82,7 +82,7 @@ const UserModel = {
     }
   },
 
-  deleteUser: async (id: string): Promise<User> => {
+  deleteUser: async (id: number): Promise<User> => {
     try {
       const conn = await db.connect();
       const sql = `DELETE FROM public."user"

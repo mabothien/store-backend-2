@@ -4,5 +4,5 @@
     "helpers": ["helpers/**/*.?(m)js"],
 
     "stopSpecOnExpectationFailure": false,
-    "random": false
+    "random": true
   }
