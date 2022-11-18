@@ -1,8 +1,18 @@
 import UserModel, { User } from '../user';
 
 describe('Test User Model Methods', () => {
-  let user = {} as User;
-
+  let initUser = {} as User;
+  beforeAll(async () => {
+    const params: User = {
+      id: 1,
+      firstName: 'long',
+      lastName: 'tran',
+      username: 'longtran',
+      password: 'long123',
+    };
+    initUser = await UserModel.create(params);
+    return initUser;
+  });
   it('create user', async () => {
     const params = {
       firstName: 'long',
@@ -10,20 +20,22 @@ describe('Test User Model Methods', () => {
       username: 'longtran',
       password: 'long123',
     };
-    const result = await UserModel.create(params);
-    user = result;
+    await UserModel.create(params);
     const users = await UserModel.index();
     expect(users.length).toBeGreaterThan(0);
   });
 
   it('Get user by Id', async () => {
-    const result = await UserModel.show(user.id as number);
+    if (initUser.id !== null) {
+      throw new Error('user is not created');
+    }
+    const result = await UserModel.show(initUser.id);
     expect(result).toEqual({
-      id: user.id,
+      id: 1,
       firstName: 'long',
       lastName: 'tran',
       username: 'longtran',
-      password: user.password,
+      password: 'long123',
     });
   });
 
