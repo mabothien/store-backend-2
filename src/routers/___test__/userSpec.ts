@@ -34,6 +34,18 @@ describe('Test Routes User', () => {
     const res = await request
       .get(`/api/user/1`)
       .set('Authorization', `Bearer ${token.body}`);
-    expect(res.status).toEqual(200);
+    expect(res.statusCode).toEqual(200);
+  });
+
+  it('Route get token from authen ', async () => {
+    const user = {
+      username: 'longtran',
+      password: 'long123',
+    };
+    const res = await request.post('/api/user/auth').send({
+      username:user.username,
+      password: user.password
+    })
+    expect(res.statusCode).toEqual(200);
   });
 });
