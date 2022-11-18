@@ -3,12 +3,24 @@ import OrderModel from '../order';
 describe('Order Model', () => {
   it('Get Order by Id', async () => {
     const order = await OrderModel.show(1);
-    expect(order.id).toEqual(1);
+    expect(order).toEqual({
+      id: 1,
+      status: 'created',
+      user_id: 1,
+      quantity: 5,
+    });
   });
 
   it('Get all Order', async () => {
     const order = await OrderModel.index();
-    expect(order.length).toBeGreaterThan(0);
+    expect(order).toEqual([
+      {
+        id: 1,
+        status: 'created',
+        user_id: 1,
+        quantity: 5,
+      },
+    ]);
   });
   it('create Order', async () => {
     const order = {
