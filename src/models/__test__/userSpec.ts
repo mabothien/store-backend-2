@@ -43,4 +43,13 @@ describe('Test User Model Methods', () => {
     const users = await UserModel.index();
     expect(users.length).toBeGreaterThan(0);
   });
+
+  it('get token', async () => {
+    const params = {
+      username: 'longtran',
+      password: 'long123',
+    };
+    const auth = await UserModel.authenticate(params.username, params.password);
+    expect(auth?.username).toEqual('longtran');
+  });
 });

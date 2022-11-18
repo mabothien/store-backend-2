@@ -13,7 +13,7 @@ describe('Order Model', () => {
     };
     const initUser = await UserModel.create(paramUser);
     if (initUser.id !== null) {
-      throw new Error("user is not created")
+      throw new Error('user is not created');
     }
     const params: Order = {
       id: 1,
@@ -22,13 +22,17 @@ describe('Order Model', () => {
       quantity: 5,
     };
 
-    initOrder = await OrderModel.create(params.status,params.quantity,params.user_id);
+    initOrder = await OrderModel.create(
+      params.status,
+      params.quantity,
+      params.user_id,
+    );
     return initOrder;
   });
 
   it('Get Order by Id', async () => {
     if (initOrder.id !== null) {
-      throw new Error("order is not created")
+      throw new Error('order is not created');
     }
     const order = await OrderModel.show(initOrder.id);
     expect(order).toEqual({
