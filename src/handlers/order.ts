@@ -22,8 +22,8 @@ export const create = async (
   next: NextFunction,
 ) => {
   try {
-    const { status, quantity, orderId } = req.body;
-    const result = await OrderModel.create(status, quantity, orderId);
+    const { status, quantity, userId } = req.body;
+    const result = await OrderModel.create(status, quantity, userId);
     res.json({
       data: result,
     });

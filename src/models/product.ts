@@ -30,13 +30,13 @@ const ProductModel = {
     }
   },
 
-  create: async (product: Product): Promise<Product> => {
+  create: async (name: string, price: number): Promise<Product> => {
     try {
       const conn = await client.connect();
       const sql = `INSERT INTO public.product (name, price)
                   values ($1, $2)
                   RETURNING name, price`;
-      const result = await conn.query(sql, [product.name, product.price]);
+      const result = await conn.query(sql, [name, price]);
       conn.release();
       return result.rows[0];
     } catch (error) {

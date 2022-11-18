@@ -22,7 +22,8 @@ export const create = async (
   next: NextFunction,
 ) => {
   try {
-    const result = await ProductModel.create(req.body);
+    const { name, price } = req.body;
+    const result = await ProductModel.create(name, price);
     res.json({
       data: result,
     });

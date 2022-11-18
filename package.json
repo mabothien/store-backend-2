@@ -2,7 +2,7 @@
   "name": "store-backend-2",
   "version": "1.0.0",
   "description": "Storefront Backend",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js",
@@ -13,7 +13,7 @@
     "prettier-format": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
     "jasmine": "jasmine",
     "watch": "tsc-watch --esModuleInterop src/index.ts --outDir ./build --onSuccess \"node ./build/index.js\"",
-    "test": "set ENV=test && db-migrate --env test up && jasmine && db-migrate db:drop test",
+    "test": "set ENV=test && db-migrate --env test up && jasmine && db-migrate db:drop devdb_test",
     "test-source": "npm run build && npm run jasmine",
     "tsc": "tsc"
   },

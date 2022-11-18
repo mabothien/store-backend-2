@@ -4,6 +4,9 @@ import app from '../../index';
 const request = supertest(app);
 
 let token: any;
+let order: any;
+let product: any;
+let user: any;
 describe('Test Routes productOrder', () => {
   beforeAll(async () => {
     token = await request.post('/api/user/auth').send({
@@ -11,22 +14,19 @@ describe('Test Routes productOrder', () => {
       password: 'long123',
     });
 
-    await request
+    user = await request
+      .get(`/api/user/1`)
+      .set('Authorization', `Bearer ${token.body}`);
+
+    order = await request
       .post('/api/order/create')
       .send({
         status: 'created',
-        userId: 1,
         quantity: 1000,
+        userId: user.body.data.id,
       })
       .set('Authorization', `Bearer ${token.body}`);
-
-    await request
-      .post('/api/product/create')
-      .set('Authorization', `Bearer ${token.body}`)
-      .send({
-        name: 'test',
-        price: '1000',
-      });
+    product = await request.get(`/api/product/1`);
   });
 
   it('Route add product to order ', async () => {
@@ -34,8 +34,8 @@ describe('Test Routes productOrder', () => {
       .post('/api/productOrder/create')
       .set('Authorization', `Bearer ${token.body}`)
       .send({
-        orderId: 1,
-        productId: 1,
+        orderId: order.body.data.id,
+        productId: product.body.data.id,
         quantity: 1,
       });
     expect(res.statusCode).toEqual(200);
