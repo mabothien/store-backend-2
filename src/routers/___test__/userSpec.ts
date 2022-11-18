@@ -1,5 +1,6 @@
 import supertest from 'supertest';
 import app from '../../index';
+import jwt from 'jsonwebtoken';
 
 const request = supertest(app);
 
@@ -38,14 +39,22 @@ describe('Test Routes User', () => {
   });
 
   it('Route get token from authen ', async () => {
-    const user = {
+    const params = {
       username: 'longtran',
       password: 'long123',
+      token: jwt.sign(
+        { username: 'longtran', firstName: 'long', lastName: 'tran' },
+        process.env.TOKEN_SECRET_KEY as unknown as string,
+      ),
     };
     const res = await request.post('/api/user/auth').send({
-      username:user.username,
-      password: user.password
-    })
+      username: params.username,
+      password: params.password,
+    });
     expect(res.statusCode).toEqual(200);
+    await request
+      .get(`/api/user/1`)
+      .set('Authorization', `Bearer ${res.body.token}`);
+    expect(res.body.token).toBe(params.token);
   });
 });
