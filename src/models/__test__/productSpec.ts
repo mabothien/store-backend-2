@@ -1,12 +1,24 @@
-import ProductModel from '../product';
+import ProductModel, { Product } from '../product';
 
 describe('Test Product Model Methods', () => {
-  it('Get Product by Id', async () => {
-    const result = await ProductModel.show(1);
-    expect(result).toEqual({
-      id: 1,
-      name: 'test',
+  let initProduct = {} as Product;
+  beforeAll(async () => {
+    const product: Product = {
+      name: 'cake',
       price: 1000,
+    };
+    initProduct = await ProductModel.create(product.name, product.price);
+  });
+
+  it('Get Product by Id', async () => {
+    if (initProduct === null) {
+      throw new Error('product is not created');
+    }
+    const result = await ProductModel.show(initProduct.id as number);
+    expect(result).toEqual({
+      id: initProduct.id,
+      name: initProduct.name,
+      price: initProduct.price,
     });
   });
 

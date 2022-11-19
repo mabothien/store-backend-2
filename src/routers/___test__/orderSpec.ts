@@ -10,9 +10,17 @@ describe('Test order Routes', () => {
       username: 'longtran',
       password: 'long123',
     });
+
+    const res = await request.post('/api/user/create').send({
+      firstName: 'long2',
+      lastName: 'tran2',
+      username: 'longtran2',
+      password: 'long123',
+    });
     user = await request
-      .get(`/api/user/1`)
+      .get(`/api/user/` + res.body.data.id)
       .set('Authorization', `Bearer ${token.body}`);
+    console.log('user-test', user);
   });
 
   it('Route get all order', async () => {

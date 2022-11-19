@@ -10,7 +10,7 @@ const ProductOrderModel = {
       const conn = await client.connect();
       const sql = `INSERT INTO public.product_order (orderId, productId, quantity)
                   values ($1, $2, $3)
-                  RETURNING orderId`;
+                  RETURNING *`;
       const result = await conn.query(sql, [
         product.orderId,
         product.productId,
